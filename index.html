@@ -889,8 +889,16 @@
     document.getElementById("prev").addEventListener("click", () => show(current - 1));
     document.getElementById("next").addEventListener("click", () => show(current + 1));
     window.addEventListener("keydown", (event) => {
-      if (["ArrowRight", " ", "PageDown"].includes(event.key)) { show(current + 1); event.preventDefault(); }
-      if (["ArrowLeft", "PageUp"].includes(event.key)) { show(current - 1); event.preventDefault(); }
+      const nextKeys = ["ArrowRight", "PageDown", " ", "Spacebar"];
+      const prevKeys = ["ArrowLeft", "PageUp"];
+      if (nextKeys.includes(event.key) || event.code === "Space") {
+        show(current + 1);
+        event.preventDefault();
+      }
+      if (prevKeys.includes(event.key)) {
+        show(current - 1);
+        event.preventDefault();
+      }
     });
     function indexFromHash() {
       const match = location.hash.match(/\d+/);
