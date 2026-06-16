@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FounderNexus x Catalyst Pricing Lab</title>
+  <style>
+    @font-face { font-family: "Plus Jakarta Sans"; src: url("assets/fonts/plus-jakarta-sans-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Plus Jakarta Sans"; src: url("assets/fonts/plus-jakarta-sans-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+    @font-face { font-family: "Plus Jakarta Sans"; src: url("assets/fonts/plus-jakarta-sans-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+    @font-face { font-family: "Plus Jakarta Sans"; src: url("assets/fonts/plus-jakarta-sans-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+    :root {
+      --deep: #01052A;
+      --ink: #202020;
+      --muted: #56646F;
+      --blue: #007BE4;
+      --soft: #D3EAFD;
+      --pale: #F1F8FF;
+      --page: #F9F9F9;
+      --line: #D3D6DA;
+      --white: #FFFFFF;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+      background: var(--page);
+      color: var(--ink);
+      overflow: hidden;
+    }
+    .page {
+      height: 100dvh;
+      display: grid;
+      grid-template-rows: 80px 1fr 52px;
+      padding: 28px 48px;
+    }
+    .topbar, .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .logo { width: 166px; height: auto; display: block; }
+    .context { color: var(--muted); font-size: 12px; font-weight: 700; }
+    .footer {
+      border-top: 1px solid rgba(86,100,111,.18);
+      padding-top: 16px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .lab {
+      align-self: center;
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 34px;
+      align-items: stretch;
+    }
+    .intro {
+      display: grid;
+      align-content: start;
+      gap: 24px;
+    }
+    .kicker {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+    h1, h2, p { margin: 0; }
+    h1 {
+      max-width: 720px;
+      font-size: clamp(42px, 5vw, 68px);
+      line-height: .98;
+      font-weight: 700;
+    }
+    .lead {
+      max-width: 660px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+    .segment {
+      display: inline-grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      width: min(100%, 600px);
+      padding: 6px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--white);
+    }
+    .segment button {
+      border: 0;
+      border-radius: 7px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 12px 14px;
+      transition: background 160ms ease-out, color 160ms ease-out;
+    }
+    .segment button.active {
+      background: var(--deep);
+      color: var(--white);
+    }
+    .scenario {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 24px 58px rgba(1,5,42,.08);
+    }
+    .scenario-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      padding: 28px;
+      background: var(--deep);
+      color: var(--white);
+    }
+    .scenario-head strong {
+      display: block;
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .scenario-head h2 {
+      max-width: 600px;
+      font-size: 34px;
+      line-height: 1.06;
+      font-weight: 700;
+    }
+    .allocation {
+      min-width: 160px;
+      text-align: right;
+    }
+    .allocation span {
+      display: block;
+      font-size: 46px;
+      line-height: 1;
+      font-weight: 800;
+    }
+    .allocation small {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255,255,255,.7);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 20px 28px 10px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 18px;
+      background: var(--pale);
+    }
+    .metric b {
+      display: block;
+      color: var(--deep);
+      font-size: 28px;
+      line-height: 1;
+    }
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .mix {
+      padding: 18px 28px 28px;
+    }
+    .bar {
+      display: grid;
+      grid-template-columns: var(--s1, 1fr) var(--s2, 1fr);
+      height: 22px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--pale);
+      border: 1px solid var(--line);
+    }
+    .bar div:first-child { background: var(--blue); }
+    .bar div:last-child { background: var(--soft); }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .legend i {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      margin-right: 7px;
+    }
+    .blue-dot { background: var(--blue); }
+    .soft-dot { background: var(--soft); }
+    .rationale {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      padding: 0 28px 28px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 18px;
+    }
+    .card strong {
+      display: block;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.45;
+      font-weight: 500;
+    }
+    .note {
+      padding: 16px 28px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 700;
+      background: var(--page);
+    }
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .page { padding: 22px 20px; grid-template-rows: 64px auto auto; }
+      .lab, .scenario-head, .metrics, .rationale { grid-template-columns: 1fr; }
+      .allocation { text-align: left; }
+      h1 { font-size: 40px; }
+      .segment { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <img class="logo" src="assets/foundernexus-logo.png" alt="FounderNexus">
+      <span class="context">Catalyst pricing lab</span>
+    </header>
+
+    <section class="lab" aria-label="Catalyst pricing scenario lab">
+      <div class="intro">
+        <p class="kicker">Separate experiment</p>
+        <h1>Try the $20k launch allocation by founder-stage mix.</h1>
+        <p class="lead">This is a safe interactive lab, separate from the proposal deck. It uses precomputed scenarios so the conversation stays directional and avoids live pricing math.</p>
+        <div class="segment" role="tablist" aria-label="Pricing scenario">
+          <button class="active" type="button" data-scenario="stage1">Stage 1 focus</button>
+          <button type="button" data-scenario="stage2">Stage 2 focus</button>
+          <button type="button" data-scenario="blended">Blended launch</button>
+        </div>
+      </div>
+
+      <article class="scenario" aria-live="polite">
+        <div class="scenario-head">
+          <div>
+            <strong id="scenario-label">Stage 1 focus</strong>
+            <h2 id="scenario-title">More founder volume for earlier marketing-system needs.</h2>
+          </div>
+          <div class="allocation">
+            <span>$20k</span>
+            <small>Standard allocation</small>
+          </div>
+        </div>
+        <div class="metrics">
+          <div class="metric"><b id="stage1-count">108</b><span>Stage 1 engagements</span></div>
+          <div class="metric"><b id="stage2-count">0</b><span>Stage 2 engagements</span></div>
+          <div class="metric"><b id="usage">~100%</b><span>Allocation use</span></div>
+        </div>
+        <div class="mix">
+          <div class="bar" id="mix-bar" style="--s1: 108; --s2: 0;"><div></div><div></div></div>
+          <div class="legend"><span><i class="blue-dot"></i>Stage 1: $185 assumed Standard credit</span><span><i class="soft-dot"></i>Stage 2: $462 assumed Standard credit</span></div>
+        </div>
+        <div class="rationale">
+          <div class="card"><strong>Use when</strong><p id="use-when">Catalyst wants broad early-stage learning across positioning, founder-led content, and first repeatable demand motion.</p></div>
+          <div class="card"><strong>Tradeoff</strong><p id="tradeoff">More surface area, lower late-stage intent. Best for validating topic fit before expanding the allocation.</p></div>
+        </div>
+        <p class="note">Numbers are illustrative, using the high end of current Standard discounted credit rates. Actual drawdown depends on qualifying non-client founder attendance and final approved terms.</p>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <span>Prototype only - not linked from the live proposal deck</span>
+      <span>foundernexus.com</span>
+    </footer>
+  </main>
+
+  <script>
+    const scenarios = {
+      stage1: {
+        label: "Stage 1 focus",
+        title: "More founder volume for earlier marketing-system needs.",
+        stage1: "108",
+        stage2: "0",
+        usage: "~100%",
+        bar: ["108", "0"],
+        useWhen: "Catalyst wants broad early-stage learning across positioning, founder-led content, and first repeatable demand motion.",
+        tradeoff: "More surface area, lower late-stage intent. Best for validating topic fit before expanding the allocation."
+      },
+      stage2: {
+        label: "Stage 2 focus",
+        title: "Fewer engagements, higher-intent scaling conversations.",
+        stage1: "0",
+        stage2: "43",
+        usage: "~99%",
+        bar: ["0", "43"],
+        useWhen: "Catalyst wants fewer but more mature conversations around integrated marketing, scaling demand, and market-expansion clarity.",
+        tradeoff: "Less volume, more expensive per engagement. Best when Catalyst wants the first pilot to focus on higher-intent scaling questions."
+      },
+      blended: {
+        label: "Blended launch",
+        title: "A balanced pilot across early volume and scaling intent.",
+        stage1: "48",
+        stage2: "24",
+        usage: "~100%",
+        bar: ["48", "24"],
+        useWhen: "Catalyst wants the first allocation to test both founder-led GTM needs and more mature Stage 2 scaling questions.",
+        tradeoff: "More nuanced to manage. Best if the fit call confirms two strong topic lanes instead of one."
+      }
+    };
+    const buttons = [...document.querySelectorAll("[data-scenario]")];
+    const fields = {
+      label: document.getElementById("scenario-label"),
+      title: document.getElementById("scenario-title"),
+      stage1: document.getElementById("stage1-count"),
+      stage2: document.getElementById("stage2-count"),
+      usage: document.getElementById("usage"),
+      bar: document.getElementById("mix-bar"),
+      useWhen: document.getElementById("use-when"),
+      tradeoff: document.getElementById("tradeoff")
+    };
+    function selectScenario(key) {
+      const scenario = scenarios[key];
+      buttons.forEach(button => button.classList.toggle("active", button.dataset.scenario === key));
+      fields.label.textContent = scenario.label;
+      fields.title.textContent = scenario.title;
+      fields.stage1.textContent = scenario.stage1;
+      fields.stage2.textContent = scenario.stage2;
+      fields.usage.textContent = scenario.usage;
+      fields.bar.style.setProperty("--s1", scenario.bar[0]);
+      fields.bar.style.setProperty("--s2", scenario.bar[1]);
+      fields.useWhen.textContent = scenario.useWhen;
+      fields.tradeoff.textContent = scenario.tradeoff;
+    }
+    buttons.forEach(button => button.addEventListener("click", () => selectScenario(button.dataset.scenario)));
+  </script>
+</body>
+</html>
