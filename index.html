@@ -117,7 +117,7 @@
     }
     h2 {
       max-width: 860px;
-      font-size: clamp(38px, 4.45vw, 56px);
+      font-size: clamp(34px, 4vw, 50px);
       line-height: 1.04;
       font-weight: 700;
     }
@@ -364,6 +364,28 @@
       line-height: 1.4;
       display: block;
     }
+    .pilot-topics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .pilot-topic {
+      border: 1px solid var(--line);
+      background: var(--white);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 600;
+    }
+    .pilot-topic strong {
+      color: var(--blue);
+      text-transform: uppercase;
+      font-size: 11px;
+      margin-right: 6px;
+    }
     .profile-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -433,16 +455,20 @@
     }
     .proposal-layout {
       display: grid;
-      grid-template-columns: .9fr 1.1fr;
+      grid-template-columns: 1fr 1.08fr;
       gap: 22px;
-      margin-top: 28px;
+      margin-top: 22px;
       align-items: stretch;
+    }
+    .proposal-slide h2 {
+      max-width: 1000px;
+      font-size: clamp(32px, 3.5vw, 46px);
     }
     .proposal-hero {
       background: var(--deep);
       color: var(--white);
       border-radius: 10px;
-      padding: 26px;
+      padding: 28px;
       display: grid;
       gap: 16px;
       align-content: start;
@@ -455,9 +481,23 @@
     }
     .proposal-hero .price {
       color: var(--white);
-      font-size: 58px;
+      font-size: 66px;
     }
     .proposal-hero p { color: rgba(255,255,255,.74); font-size: 17px; line-height: 1.45; }
+    .proposal-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .proposal-metric {
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(255,255,255,.06);
+    }
+    .proposal-metric b { display: block; color: var(--white); font-size: 23px; line-height: 1; }
+    .proposal-metric span { display: block; color: rgba(255,255,255,.68); font-size: 11px; line-height: 1.25; margin-top: 6px; font-weight: 600; }
     .proposal-list {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -478,6 +518,11 @@
       margin-bottom: 10px;
     }
     .proposal-item p { color: var(--muted); font-size: 15px; line-height: 1.45; font-weight: 500; }
+    .proposal-item.featured {
+      background: var(--pale);
+      border-color: var(--blue);
+      box-shadow: inset 0 0 0 1px rgba(0,123,228,.14);
+    }
     .program-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -538,6 +583,33 @@
       text-transform: uppercase;
     }
     .credit-table td strong { color: var(--ink); }
+    .credit-table tr.focus-row td {
+      background: var(--pale);
+      color: var(--deep);
+    }
+    .credit-table tr.focus-row td:first-child {
+      box-shadow: inset 4px 0 0 var(--blue);
+    }
+    .credit-table tr.recommended-row td {
+      background: var(--soft);
+      color: var(--deep);
+      font-weight: 600;
+    }
+    .recommendation-tag {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 10px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 700;
+      text-transform: uppercase;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
     .question-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -559,6 +631,20 @@
       margin-bottom: 10px;
     }
     .question-card p { color: rgba(255,255,255,.82); font-size: 17px; line-height: 1.38; font-weight: 600; }
+    .question-card.priority {
+      background: rgba(211,234,253,.16);
+      border-color: rgba(211,234,253,.38);
+    }
+    .question-card ul {
+      margin-top: 10px;
+      gap: 7px;
+    }
+    .question-card li {
+      color: rgba(255,255,255,.76);
+      font-size: 13px;
+      line-height: 1.38;
+      padding-left: 14px;
+    }
     .note {
       margin-top: 18px;
       color: var(--muted);
@@ -604,10 +690,13 @@
       display: grid;
       gap: 10px;
       z-index: 20;
+      opacity: .22;
+      transition: opacity 160ms ease-out;
     }
+    .controls:hover, .controls:focus-within { opacity: 1; }
     .controls button {
-      width: 44px;
-      height: 44px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       border: 1px solid rgba(255,255,255,.4);
       background: rgba(255,255,255,.94);
@@ -625,7 +714,10 @@
       display: flex;
       gap: 8px;
       z-index: 20;
+      opacity: .28;
+      transition: opacity 160ms ease-out;
     }
+    .dots:hover, .dots:focus-within { opacity: .9; }
     .dot {
       width: 7px;
       height: 7px;
@@ -636,6 +728,18 @@
       cursor: pointer;
     }
     .dot.active { background: var(--blue); }
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 180ms ease-out, transform 180ms ease-out;
+    }
+    .slide.active [data-reveal].revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .slide, [data-reveal], .controls, .dots { transition: none; }
+    }
     @media (max-width: 900px) {
       body { overflow: auto; }
       .deck { height: auto; }
@@ -644,7 +748,7 @@
       h1 { font-size: 42px; }
       h2 { font-size: 34px; }
       .lead { font-size: 18px; }
-      .hero-grid, .comparison, .image-split, .decision-map, .photo-grid, .profile-layout, .pricing-grid, .program-grid, .question-grid, .activation, .next-grid, .proposal-layout, .proposal-list { grid-template-columns: 1fr; }
+      .hero-grid, .comparison, .image-split, .decision-map, .photo-grid, .profile-layout, .pricing-grid, .program-grid, .question-grid, .activation, .next-grid, .proposal-layout, .proposal-list, .proposal-metrics, .pilot-topics { grid-template-columns: 1fr; }
       .controls { right: 14px; }
       .dots { bottom: 12px; }
     }
@@ -653,6 +757,7 @@
       html, body { width: 13.333in; height: 7.5in; background: var(--white); overflow: visible; }
       .deck { width: 13.333in; height: auto; background: var(--white); }
       .slide { position: relative; opacity: 1 !important; pointer-events: auto; transform: none !important; width: 13.333in; height: 7.5in; min-height: 7.5in; padding: 28px 104px 28px 48px; page-break-after: always; break-after: page; }
+      [data-reveal] { opacity: 1 !important; transform: none !important; }
       .controls, .dots { display: none; }
     }
   </style>
@@ -684,8 +789,8 @@
         <p class="kicker">Why the room works</p>
         <h2>FounderNexus starts with member need, not provider inventory.</h2>
         <div class="comparison">
-          <article class="panel"><span class="tag">Paid-access model</span><h3>Pay for visibility.</h3><ul><li>Exposure comes before relevance.</li><li>Member trust is treated like distribution.</li><li>Broad attendance creates filtering work.</li></ul></article>
-          <article class="panel good"><span class="tag">FounderNexus model</span><h3>Earn relevance.</h3><ul><li>The member problem is identified first.</li><li>Fit is matched by topic, stage, and expertise.</li><li>Follow-up starts with context.</li></ul></article>
+          <article class="panel" data-reveal><span class="tag">Paid-access model</span><h3>Pay for visibility.</h3><ul><li>Exposure comes before relevance.</li><li>Member trust is treated like distribution.</li><li>Broad attendance creates filtering work.</li></ul></article>
+          <article class="panel good" data-reveal><span class="tag">FounderNexus model</span><h3>Earn relevance.</h3><ul><li>The member problem is identified first.</li><li>Fit is matched by topic, stage, and expertise.</li><li>Follow-up starts with context.</li></ul></article>
         </div>
       </div>
       <footer class="footer"><span>Trust is protected before any activity is activated</span><span class="page-no">02 / 12</span></footer>
@@ -703,9 +808,9 @@
         <h2>You buy engagement credits, not member lists.</h2>
           <p class="lead">Credits are consumed when approved non-client founders attend the right format.</p>
           <div class="flow">
-            <article class="flow-step"><span class="num">1</span><div><h3>Identify need</h3><p>Topic and stage define the room.</p></div></article>
-            <article class="flow-step"><span class="num">2</span><div><h3>Connect to the right room</h3><p>Members match your category, ACV, stage fit, and follow-up capacity.</p></div></article>
-            <article class="flow-step"><span class="num">3</span><div><h3>Consume credits</h3><p>Credits apply only to qualifying non-client founder participation.</p></div></article>
+            <article class="flow-step" data-reveal><span class="num">1</span><div><h3>Identify need</h3><p>Topic and stage define the room.</p></div></article>
+            <article class="flow-step" data-reveal><span class="num">2</span><div><h3>Connect to the right room</h3><p>Members match your category, ACV, stage fit, and follow-up capacity.</p></div></article>
+            <article class="flow-step" data-reveal><span class="num">3</span><div><h3>Consume credits</h3><p>Credits apply only to qualifying non-client founder participation.</p></div></article>
           </div>
         </div>
       </div>
@@ -736,6 +841,10 @@
           <article class="photo-tile"><img src="assets/drive-candidate-3.jpg" alt="Expert session room"><div class="tile-copy"><strong>Expert sessions</strong><span>Online AMA plus peer-and-expert input, with one expert per session and any geography served.</span></div></article>
           <article class="photo-tile"><img src="assets/workshop-room.jpg" alt="Stage matched session"><div class="tile-copy"><strong>Stage segmentation</strong><span>Rooms are grouped by founder stage so peer input, expertise, and follow-up context stay relevant.</span></div></article>
         </div>
+        <div class="pilot-topics">
+          <div class="pilot-topic"><strong>Candidate expert session</strong>Founder-led GTM without a full marketing team.</div>
+          <div class="pilot-topic"><strong>Candidate dinner</strong>Positioning when the market understands the problem differently than the founder does.</div>
+        </div>
       </div>
       <footer class="footer"><span>Formats are selected by founder need, fit, and operational quality</span><span class="page-no">05 / 12</span></footer>
     </section>
@@ -746,9 +855,9 @@
         <p class="kicker">Connection events, priced responsibly</p>
         <h2>Engagement Credits create a clear buying model without weakening member trust.</h2>
         <div class="program-grid">
-          <article class="program-card blue"><strong>Credit use</strong><h3>Only non-client engagement counts</h3><p>A credit is consumed when a founder who is not already your client attends an approved format.</p></article>
-          <article class="program-card"><strong>Carve-out</strong><h3>You do not pay for customers</h3><p>Existing client relationships are excluded when they are documented under the current policy.</p></article>
-          <article class="program-card"><strong>Follow-up</strong><h3>Useful contact, not a handoff</h3><p>Members consent to contact sharing, and your team owns the next conversation.</p></article>
+          <article class="program-card blue" data-reveal><strong>Credit use</strong><h3>Only non-client engagement counts</h3><p>A credit is consumed when a founder who is not already your client attends an approved format.</p></article>
+          <article class="program-card" data-reveal><strong>Carve-out</strong><h3>You do not pay for customers</h3><p>Existing client relationships are excluded when they are documented under the current policy.</p></article>
+          <article class="program-card" data-reveal><strong>Follow-up</strong><h3>Useful contact, not a handoff</h3><p>Members consent to contact sharing, and your team owns the next conversation.</p></article>
         </div>
       </div>
       <footer class="footer"><span>Credits create discipline without compromising member trust</span><span class="page-no">06 / 12</span></footer>
@@ -758,12 +867,12 @@
       <header class="topbar"><img class="logo" src="assets/foundernexus-logo.png" alt="FounderNexus"><span class="context">Stage Credit Pricing</span></header>
       <div class="body">
         <p class="kicker">Pricing by founder stage</p>
-        <h2>Credit price is set by the founder stage and your economics.</h2>
+        <h2>Credit price is set by the founder stage and your economics. <span class="recommendation-tag">Catalyst focus: Stage 1-2</span></h2>
         <table class="credit-table" aria-label="Credit price ranges by founder stage">
           <thead><tr><th>Stage</th><th>ARR range</th><th>Funding stage</th><th>Typical ACV range</th><th>Credit price range</th></tr></thead>
           <tbody>
-            <tr><td><strong>Stage 1</strong></td><td>$0-$2M</td><td>Pre-Seed / Seed</td><td>$10-$50k</td><td>$150-$200</td></tr>
-            <tr><td><strong>Stage 2</strong></td><td>$2-$10M</td><td>Series A</td><td>$30-$150k</td><td>$400-$500</td></tr>
+            <tr class="focus-row"><td><strong>Stage 1</strong></td><td>$0-$2M</td><td>Pre-Seed / Seed</td><td>$10-$50k</td><td>$150-$200</td></tr>
+            <tr class="focus-row"><td><strong>Stage 2</strong></td><td>$2-$10M</td><td>Series A</td><td>$30-$150k</td><td>$400-$500</td></tr>
             <tr><td><strong>Stage 3</strong></td><td>$10-$50M</td><td>Series B/C</td><td>$50-$250k</td><td>$750-$1,000</td></tr>
             <tr><td><strong>Stage 4</strong></td><td>$50M+</td><td>Series D+</td><td>$100-$500k+</td><td>$1,500-$2,000</td></tr>
           </tbody>
@@ -777,12 +886,12 @@
       <header class="topbar"><img class="logo" src="assets/foundernexus-logo.png" alt="FounderNexus"><span class="context">Bundle Economics</span></header>
       <div class="body">
         <p class="kicker">Prepaid annual allocations</p>
-        <h2>Bundle discounts apply to the per-credit price, not the value of the room.</h2>
+        <h2>Bundle discounts apply to the per-credit price, not the value of the room. <span class="recommendation-tag">Recommended: Standard</span></h2>
         <table class="credit-table" aria-label="Bundle spend and illustrative credit counts">
           <thead><tr><th>Bundle</th><th>Spend</th><th>Discount</th><th>Stage 1 credits</th><th>Stage 2 credits</th><th>Stage 3 credits</th><th>Stage 4 credits</th></tr></thead>
           <tbody>
             <tr><td><strong>Starter</strong></td><td>$6,000</td><td>0%</td><td>30</td><td>12</td><td>6</td><td>3</td></tr>
-            <tr><td><strong>Standard</strong></td><td>$20,000</td><td>7.5%</td><td>108</td><td>43</td><td>22</td><td>11</td></tr>
+            <tr class="recommended-row"><td><strong>Standard</strong></td><td>$20,000</td><td>7.5%</td><td>108</td><td>43</td><td>22</td><td>11</td></tr>
             <tr><td><strong>Committed</strong></td><td>$45,000</td><td>15%</td><td>265</td><td>106</td><td>53</td><td>26</td></tr>
             <tr><td><strong>Strategic</strong></td><td>$90,000</td><td>22.5%</td><td>581</td><td>233</td><td>116</td><td>58</td></tr>
             <tr><td><strong>Founding</strong></td><td>$150,000</td><td>30%</td><td>1,071</td><td>429</td><td>214</td><td>107</td></tr>
@@ -793,22 +902,27 @@
       <footer class="footer"><span>Locked-in pricing protects purchased credits against future base increases</span><span class="page-no">08 / 12</span></footer>
     </section>
 
-    <section class="slide">
+    <section class="slide proposal-slide">
       <header class="topbar"><img class="logo" src="assets/foundernexus-logo.png" alt="FounderNexus"><span class="context">Proposal for Catalyst</span></header>
       <div class="body">
         <p class="kicker">Proposal for Catalyst</p>
-        <h2>Start with a Standard launch allocation focused on Stage 1-2 founder marketing needs.</h2>
+        <h2>Standard launch allocation for Stage 1-2 founder marketing needs.</h2>
         <div class="proposal-layout">
-          <article class="proposal-hero">
+          <article class="proposal-hero" data-reveal data-reveal-start>
             <strong>Recommended launch allocation</strong>
             <span class="price">$20,000</span>
             <p>Standard annual allocation with a 7.5% per-credit discount, designed to test fit across a focused set of member-relevant marketing conversations.</p>
+            <div class="proposal-metrics">
+              <div class="proposal-metric"><b>Stage 1-2</b><span>Primary focus</span></div>
+              <div class="proposal-metric"><b>108 / 43</b><span>Illustrative credits</span></div>
+              <div class="proposal-metric"><b>2 topics</b><span>Initial activation</span></div>
+            </div>
           </article>
           <div class="proposal-list">
-            <article class="proposal-item"><strong>Stage focus</strong><p>Stage 1-2 founders working through positioning, go-to-market, content, integrated marketing, and lean team leverage.</p></article>
-            <article class="proposal-item"><strong>Initial activation</strong><p>One expert-session topic plus one topical-dinner candidate, both gated by member need and operating quality.</p></article>
-            <article class="proposal-item"><strong>Credit drawdown</strong><p>Illustratively supports up to 108 Stage 1 or 43 Stage 2 engagements at current Standard rates, with the actual mix based on attendance.</p></article>
-            <article class="proposal-item"><strong>Guardrails</strong><p>Credits apply only to non-client engagement. Member invitations stay FounderNexus-led, consented, and no-sell.</p></article>
+            <article class="proposal-item featured" data-reveal data-reveal-start><strong>Stage focus</strong><p>Stage 1-2 founders working through positioning, go-to-market, content, integrated marketing, and lean team leverage.</p></article>
+            <article class="proposal-item featured" data-reveal data-reveal-start><strong>Initial activation</strong><p>Expert session: founder-led GTM without a full marketing team. Dinner candidate: positioning when the market reads the problem differently.</p></article>
+            <article class="proposal-item" data-reveal><strong>Credit drawdown</strong><p>Illustratively supports up to 108 Stage 1 or 43 Stage 2 engagements using the high end of current Standard discounted rates.</p></article>
+            <article class="proposal-item" data-reveal><strong>Guardrails</strong><p>Credits apply only to non-client engagement. Member invitations stay FounderNexus-led, consented, and no-sell.</p></article>
           </div>
         </div>
       </div>
@@ -821,14 +935,10 @@
         <p class="kicker">What we need to know</p>
         <h2>We need commercial context to place your firm responsibly.</h2>
         <div class="question-grid">
-          <article class="question-card"><strong>Client profile</strong><p>Who are your best clients today, and what founder stage is wrong-fit?</p></article>
-          <article class="question-card"><strong>Economics</strong><p>What is your typical ACV, and which service category fits your model?</p></article>
-          <article class="question-card"><strong>Founder need</strong><p>What problem do you solve when founder need is already visible?</p></article>
-          <article class="question-card"><strong>Capacity</strong><p>How many follow-up conversations or new clients can you support?</p></article>
-          <article class="question-card"><strong>Format fit</strong><p>Topical dinner, expert session, direct referral, or stage-matched room?</p></article>
-          <article class="question-card"><strong>Geography</strong><p>Which markets matter for in-person formats?</p></article>
-          <article class="question-card"><strong>Current clients</strong><p>Do you already serve any FounderNexus members?</p></article>
-          <article class="question-card"><strong>Budget timing</strong><p>What renewal or fiscal-year window should we anchor to?</p></article>
+          <article class="question-card priority"><strong>Founder fit</strong><p>Which founder problems can Catalyst discuss usefully in-room without pitching?</p><ul><li>Best-fit stage</li><li>Wrong-fit stage</li></ul></article>
+          <article class="question-card"><strong>Economics</strong><p>What ACV and client economics make the program worthwhile?</p><ul><li>Typical ACV</li><li>Budget timing</li></ul></article>
+          <article class="question-card priority"><strong>Activation</strong><p>Which first topics should test demand and relevance?</p><ul><li>Expert session</li><li>Topical dinner</li></ul></article>
+          <article class="question-card"><strong>Guardrails</strong><p>What follow-up offer is helpful, consented, and not a sales handoff?</p><ul><li>Current clients</li><li>Capacity</li></ul></article>
         </div>
       </div>
       <footer class="footer"><span>Fit questions protect your ROI and member trust</span><span class="page-no">10 / 12</span></footer>
@@ -842,7 +952,7 @@
           <h2>Activation is a shared process: your expertise profile plus our member signals.</h2>
           <p class="lead">FounderNexus brings the room context. You bring useful pattern recognition and responsible follow-up capacity.</p>
         </div>
-        <article class="brief">
+        <article class="brief" data-reveal>
           <h3>How activation works</h3>
           <ul><li>We document your category, stage fit, capacity, and no-sell expectations.</li><li>You identify the problems where your team can be genuinely useful.</li><li>FounderNexus matches topics to member-stated needs and the right format.</li><li>Credits apply when qualifying non-client founders participate.</li><li>Your team follows up only after consented participation.</li></ul>
         </article>
@@ -880,19 +990,42 @@
       dots.appendChild(dot);
     });
     const dotList = [...dots.children];
+    function revealItems(slide = slides[current]) {
+      return [...slide.querySelectorAll("[data-reveal]")];
+    }
+    function resetReveals(slide) {
+      const items = revealItems(slide);
+      items.forEach(item => item.classList.remove("revealed"));
+      const starters = items.filter(item => item.hasAttribute("data-reveal-start"));
+      if (starters.length) {
+        starters.forEach(item => item.classList.add("revealed"));
+      } else if (items[0]) {
+        items[0].classList.add("revealed");
+      }
+    }
+    function revealNext() {
+      const nextItem = revealItems().find(item => !item.classList.contains("revealed"));
+      if (!nextItem) return false;
+      nextItem.classList.add("revealed");
+      return true;
+    }
+    function advance() {
+      if (!revealNext()) show(current + 1);
+    }
     function show(index, updateHash = true) {
       current = Math.max(0, Math.min(slides.length - 1, index));
       slides.forEach((slide, slideIndex) => slide.classList.toggle("active", slideIndex === current));
       dotList.forEach((dot, dotIndex) => dot.classList.toggle("active", dotIndex === current));
+      resetReveals(slides[current]);
       if (updateHash) history.replaceState(null, "", "#" + (current + 1));
     }
     document.getElementById("prev").addEventListener("click", () => show(current - 1));
-    document.getElementById("next").addEventListener("click", () => show(current + 1));
+    document.getElementById("next").addEventListener("click", () => advance());
     window.addEventListener("keydown", (event) => {
       const nextKeys = ["ArrowRight", "PageDown", " ", "Spacebar"];
       const prevKeys = ["ArrowLeft", "PageUp"];
       if (nextKeys.includes(event.key) || event.code === "Space") {
-        show(current + 1);
+        advance();
         event.preventDefault();
       }
       if (prevKeys.includes(event.key)) {
