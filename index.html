@@ -567,6 +567,41 @@
       font-size: 66px;
     }
     .proposal-hero p { color: rgba(255,255,255,.74); font-size: 17px; line-height: 1.45; }
+    .proposal-rates {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .proposal-rate {
+      border: 1px solid rgba(211,234,253,.28);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(0,123,228,.15);
+    }
+    .proposal-rate span {
+      display: block;
+      color: rgba(255,255,255,.72);
+      font-size: 11px;
+      line-height: 1.2;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .proposal-rate b {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: 8px;
+      color: var(--white);
+      font-size: 30px;
+      line-height: 1;
+    }
+    .proposal-rate del {
+      color: rgba(255,255,255,.48);
+      font-size: 20px;
+      font-weight: 700;
+      text-decoration-color: rgba(255,255,255,.62);
+      text-decoration-thickness: 2px;
+    }
     .proposal-metrics {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1001,6 +1036,10 @@
             <strong>Recommended launch allocation</strong>
             <span class="price">$20,000</span>
             <p>Standard annual allocation with a 7.5% per-credit discount, designed to test fit across a focused set of member-relevant marketing conversations.</p>
+            <div class="proposal-rates" aria-label="Standard discounted credit prices">
+              <div class="proposal-rate"><span>Stage 1 credit</span><b><del>$200</del> $185</b></div>
+              <div class="proposal-rate"><span>Stage 2 credit</span><b><del>$500</del> $462</b></div>
+            </div>
             <div class="proposal-metrics">
               <div class="proposal-metric"><b>Stage 1-2</b><span>Primary focus</span></div>
               <div class="proposal-metric"><b>108 / 43</b><span>Illustrative credits</span></div>
@@ -1010,7 +1049,7 @@
           <div class="proposal-list">
             <article class="proposal-item featured" data-reveal data-reveal-start><strong>Stage focus</strong><p>Stage 1-2 founders working through positioning, go-to-market, content, integrated marketing, and lean team leverage.</p></article>
             <article class="proposal-item featured" data-reveal data-reveal-start><strong>Initial activation</strong><p>Expert session: founder-led GTM without a full marketing team. Dinner candidate: positioning when the market reads the problem differently.</p></article>
-            <article class="proposal-item" data-reveal><strong>Credit drawdown</strong><p>Illustratively supports up to 108 Stage 1 or 43 Stage 2 engagements using the high end of current Standard discounted rates.</p></article>
+            <article class="proposal-item" data-reveal><strong>Credit drawdown</strong><p>Illustratively supports up to 108 Stage 1 or 43 Stage 2 engagements at Standard rates: $185 / Stage 1 credit and $462 / Stage 2 credit.</p></article>
             <article class="proposal-item" data-reveal><strong>Guardrails</strong><p>Credits apply only to non-client engagement. Member invitations stay FounderNexus-led, consented, and no-sell.</p></article>
           </div>
         </div>
